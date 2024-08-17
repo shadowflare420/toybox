@@ -1,4 +1,4 @@
-
+#requires ffmpeg, python3.?+
 #this is set up for linux, if you want to use this on windows you will probably have to make some changes like replacing all the / with \\
 
 #os mostly for using ffmpeg and file checks
@@ -47,15 +47,19 @@ def recode(file,infile):
     if not extension=="mkv":
         filename =filename.rstrip(extension)+"mkv"
     p=0
+    #better than requiring a user prompt every 2 seconds
     while(os.path.exists(paths[2]+filename)):
         filename = filename[:len(filename)-4] +str(p)+filename[-4:]
         p+=1
+             
+    #idk why i did it this way, but it works well enough to leave alone         
     if(go):
         print("recoding "+file+" to "+filename)
+        #this isn't confusing at all 
         os.system("ffmpeg -loglevel quiet -x265-params log-level=quiet -hide_banner  -i \""+infile+"\" -map 0:a? -map 0:s? -map 0:v? -c:v libx265 -preset slow -crf 30  \""+paths[2]+filename+"\"")
 
 
-
+#a incredibly inneficient way to write code that loops through a folder and 2 subfolder levels then calls a function when a file is hit
 for filefolder in os.listdir(paths[0][:-1]):
     if os.path.isfile(paths[0]+filefolder):
         recode(filefolder)
@@ -67,6 +71,7 @@ for filefolder in os.listdir(paths[0][:-1]):
                 recode(subfile,infile)
             elif os.path.isdir(paths[0]+filefolder+"/"+subfile):
                 print("sub2")
+                #ah yes, my naming is flawless  
                 for sub2file in os.listdir(paths[0]+filefolder+"/"+subfile):
                     infile=paths[0]+filefolder+"/"+subfile+"/"+sub2file
                     recode(sub2file,infile)
