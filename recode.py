@@ -1,21 +1,41 @@
+
+#this is set up for linux, if you want to use this on windows you will probably have to make some changes like replacing all the / with \\
+
+#os mostly for using ffmpeg and file checks
 import os
+#sleep because i couldn't think of anything else to put in that spot and too lazy to rewrite properly
 from time import sleep
+
+#extensions that are allowed to be used, entered as one string then split because lazy
 kosher_extensions="MP4,mp4,mkv,MKV,avi,AVI,ts,TS,mov,MOV".split(",")
+
+#get user input, then re-assign them because i'm lazy and decided after the fact that having to type y in the middle is incredibly annoying
 paths = [input("type or paste folder path you wish to recode videos from: "), #paths[0]
-         input("also recode files in subfolders? (y/n): ")+"/", #paths[1]
-         input("type or paste output files path: ")] #paths[2]
+         input("type or paste output folder path: "),#paths[2]
+         input("also recode files in subfolders? (y/n): ")] #paths[1] 
+
+temp1=paths[1]
+temp2=paths[2]
+paths[1]=temp2
+paths[2]=temp1
 
 i=0
+
+#ensure every path has a / at the end
 for path in paths:
     if path[-1] == "/":
-        sleep(1)
+        sleep(0.01)
     elif path[-1]==" ":
         paths[i]=paths[i][:-1]
     else:
         paths[i]=paths[i]+"/"
     i+=1
+
+
+#define how to encode
 def recode(file,infile):
     go=0
+#seperate the file name from rest of path, if somehow present
     if "/" in file:
         filename=(file.rsplit("/",1))[1]
     else:
@@ -33,6 +53,9 @@ def recode(file,infile):
     if(go):
         print("recoding "+file+" to "+filename)
         os.system("ffmpeg -loglevel quiet -x265-params log-level=quiet -hide_banner  -i \""+infile+"\" -map 0:a? -map 0:s? -map 0:v? -c:v libx265 -preset slow -crf 30  \""+paths[2]+filename+"\"")
+
+
+
 for filefolder in os.listdir(paths[0][:-1]):
     if os.path.isfile(paths[0]+filefolder):
         recode(filefolder)
