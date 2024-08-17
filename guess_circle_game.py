@@ -10,7 +10,7 @@ def move_circle();
 
 while(1):
     sleep(1)
-    print("a circle has apeared! can you guess where?")
+    print("a circle has appeared! can you guess where?")
     sleep(1)
     x=input("guess x value: ")
     y=input("guess y value: ")
