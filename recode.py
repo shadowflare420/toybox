@@ -56,13 +56,14 @@ def recode(file,infile):
     if(go):
         print("recoding "+file+" to "+filename)
         #this isn't confusing at all 
-        os.system("ffmpeg -loglevel quiet -x265-params log-level=quiet -hide_banner  -i \""+infile+"\" -map 0:a? -map 0:s? -map 0:v? -c:v libx265 -preset slow -crf 30  \""+paths[2]+filename+"\"")
+        os.system("ffmpeg -loglevel quiet -hide_banner  -i \""+infile+"\" -map 0:a? -map 0:s? -map 0:v? -c:v libx265 -preset slow -crf 30  \""+paths[2]+filename+"\"")
 
 
 #a incredibly inneficient way to write code that loops through a folder and 2 subfolder levels then calls a function when a file is hit
 for filefolder in os.listdir(paths[0][:-1]):
+    infile=paths[0]+filefolder
     if os.path.isfile(paths[0]+filefolder):
-        recode(filefolder)
+        recode(filefolder,infile)
     elif paths[1]=="y/" and os.path.isdir(paths[0]+filefolder):
         print("sub1")
         for subfile in os.listdir(paths[0]+filefolder):
