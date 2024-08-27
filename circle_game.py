@@ -28,8 +28,13 @@ while(1):
     else:
         print("around " + str(error+randint(-100,100))+" units off, try again")
         tries +=1
-        if tries>10:
-            if input("reveal the answer? (yes/no): ")=="yes":
-                print("you gave up! the circle had a radius of " + str(r) + " and a center of "+str(h)+","+str(k))
+        if tries>200:
+            print("alright dum dum, i've had enough.")
+            sleep(5)
+            print("the circle had a center of " +str(h) + "," + str(k)" and a radius of " + str(r))
+
+        if tries>15:
+            if input("give up and reveal the location? (yes/no): ")=="yes":
+                print("you gave up, cause you're a dummy! the circle had a center of " +str(h) + "," + str(k)" and a radius of " + str(r))
                 move_circle()
                 tries=0
