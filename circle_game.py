@@ -1,12 +1,12 @@
 from random import randint
 tries=0
-r=200
-h=randint(-1000,1000)
-k=randint(-1000,1000)
+r=randint(-1000,1000)
+h=randint(-5000,5000)
+k=randint(-5000,5000)
 error=0
 def move_circle();
-    h=randint(-1000,1000)
-    k=randint(-1000,1000)
+    h=randint(-5000,5000)
+    k=randint(-5000,5000)
 
 while(1):
     sleep(1)
