@@ -31,7 +31,7 @@ while(1):
         if tries>200:
             print("alright dum dum, i've had enough.")
             sleep(5)
-            print("the circle had a center of " +str(circlex) + "," + str(circley)" and a radius of " + str(r))
+            print("the circle had a center of " +str(circlex) + "," + str(circley) + " and a radius of " + str(r))
             move_circle()
             tries=0
             
