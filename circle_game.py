@@ -1,4 +1,5 @@
 from random import randint
+from time import sleep
 tries=0
 r=randint(-1000,1000)
 circlex=randint(-5000,5000)
@@ -21,7 +22,7 @@ while(1):
         error = r*2 - (check * -1)
     else:
         error = r*2 - check
-    if((x - circlex)**2 + (y - circley)**2 < r**2):
+    if((int(x) - circlex)**2 + (int(y) - circley)**2 < r**2):
         print("you guessed a point correctly with " + str(tries+1) + " attempt(s)! the circle had a radius of " + str(r) + " and a center of "+str(circlex)+","+str(circley))
         move_circle()
         tries=0
